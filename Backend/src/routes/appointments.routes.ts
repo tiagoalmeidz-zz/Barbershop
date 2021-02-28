@@ -1,4 +1,4 @@
-import { request, response, Router } from 'express';
+import { Router } from 'express';
 import { startOfHour, parseISO } from 'date-fns';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
@@ -22,7 +22,7 @@ appointmentsRouter.post('/', (request, response) => {
     return response.status(400).json({ error: 'This appointment is already booked.' });
   }
 
-  const appointment = appointmentsRepository.create(provider, parsedDate);
+  const appointment = appointmentsRepository.create({ provider, date: parsedDate });
   return response.json(appointment);
 });
 
